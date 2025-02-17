@@ -22,14 +22,20 @@
 npm install
 ```
 
-2. **Create `.env` file and set env variables**
+2. **If you need Artillery**
+
+```shell
+npm install -g artillery
+```
+
+3. **Create `.env` file and set env variables**
 
 ```
 DATABASE_URL=postgres://username:password@localhost:5432/database_name
 PORT=3000
 ```
 
-3. **Start server**
+4. **Start server**
 
 ```shell
 npm run start
