@@ -31,8 +31,18 @@ npm install -g artillery
 3. **Create `.env` file and set env variables**
 
 ```
-DATABASE_URL=postgres://username:password@localhost:5432/database_name
 PORT=3000
+
+# redis
+REDIS_HOST=localhost
+REDIS_PORT=6379
+
+# postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+PG_HOST=localhost
+PG_PORT=5432
 ```
 
 4. **Start server**

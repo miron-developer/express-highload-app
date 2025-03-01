@@ -1,0 +1,57 @@
+version: "3"
+services:
+  app:
+    build: .
+    deploy:
+      replicas: 5
+    ports:
+      - "3000-3004:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+      redis:
+        condition: service_started
+    env_file:
+      - .env
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      PG_HOST: db
+      PG_PORT: 5432
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6380:6379"
+    env_file:
+      - .env
+    volumes:
+      - ./redisdata:/data
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - "5433:5432"
+    env_file:
+      - .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready",
+          "-U ${POSTGRES_USER}",
+          "-d",
+          "${POSTGRES_DB}",
+        ]
+      interval: 30s
+      timeout: 60s
+      retries: 3
+
+volumes:
+  pg_data:
+  redisdata:

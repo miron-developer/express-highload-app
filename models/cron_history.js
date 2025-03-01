@@ -12,7 +12,7 @@ const CronHistory = sequelize.define(
     },
     task_name: { type: DataTypes.STRING, allowNull: false },
     status: { type: DataTypes.STRING, allowNull: false },
-    started_at: { type: DataTypes.DATE, allowNull: false },
+    started_at: { type: DataTypes.DATE, allowNull: true },
     finished_at: { type: DataTypes.DATE, allowNull: true },
     server_id: { type: DataTypes.STRING, allowNull: false },
   },

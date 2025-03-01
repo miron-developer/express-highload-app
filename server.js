@@ -14,9 +14,6 @@ app.use("/api", cronRoutes);
 
 const PORT = process.env.PORT || 3000;
 
-// Запускаем cron-задачи при старте сервера
-initCronJobs();
-
 // const numCPUs = os.cpus().length;
 
 // Проверяем, если это мастер процесс
@@ -53,6 +50,9 @@ initCronJobs();
 
     await umzug.up();
     console.log("Migrations executed");
+
+    // Запускаем cron-задачи при старте сервера
+    initCronJobs();
 
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   } catch (error) {
